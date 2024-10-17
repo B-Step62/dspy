@@ -4,6 +4,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
+from dspy.utils.callback import with_callbacks
 import litellm
 import ujson
 from litellm.caching import Cache
@@ -29,6 +30,7 @@ class LM:
                 max_tokens >= 5000 and temperature == 1.0
             ), "OpenAI's o1-* models require passing temperature=1.0 and max_tokens >= 5000 to `dspy.LM(...)`"
 
+    @with_callbacks
     def __call__(self, prompt=None, messages=None, **kwargs):
         # Build the request.
         cache = kwargs.pop("cache", self.cache)

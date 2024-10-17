@@ -9,6 +9,7 @@ from dsp.modules import LM as DSPLM
 from dsp.utils.utils import dotdict
 from dspy.adapters.chat_adapter import field_header_pattern, format_fields
 from dspy.clients.lm import LM
+from dspy.utils.callback import with_callbacks
 
 
 class DSPDummyLM(DSPLM):
@@ -169,6 +170,7 @@ class DummyLM(LM):
             if any(field in output["content"] for field in output_fields) and final_input in input["content"]:
                 return output["content"]
 
+    @with_callbacks
     def __call__(self, prompt=None, messages=None, **kwargs):
         # Build the request.
         outputs = []
