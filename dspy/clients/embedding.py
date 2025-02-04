@@ -1,6 +1,8 @@
 import litellm
 import numpy as np
 
+from dspy.utils.callback import with_callbacks
+
 
 class Embedder:
     """DSPy embedding class.
@@ -78,6 +80,7 @@ class Embedder:
         self.caching = caching
         self.default_kwargs = kwargs
 
+    @with_callbacks
     def __call__(self, inputs, batch_size=None, caching=None, **kwargs):
         """Compute embeddings for the given inputs.
 
